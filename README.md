@@ -1,3 +1,9 @@
+# Setup
+
+## Getting the VM running
+
+If you don't already have it, install Vagrant and VirtualBox.
+
 1. Clone the repo
 2. Run `composer update`
 3. Run `php vendor/bin/homestead make`
@@ -6,3 +12,7 @@
 6. Copy your `.env.example` file to `.env` and run `php artisan key:generate`
 
 You should now be able to go to `http://whatsfordinner.test`
+
+## Setting up the database
+
+In your VM, run `php artisan migrate` to generate the database tables.
