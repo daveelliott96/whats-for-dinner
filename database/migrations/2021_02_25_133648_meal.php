@@ -15,7 +15,7 @@ class Meal extends Migration
     {
         Schema::create('meal', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('deleted_at')->nullable();
         });

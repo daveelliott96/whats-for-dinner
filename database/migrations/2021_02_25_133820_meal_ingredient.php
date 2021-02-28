@@ -17,7 +17,7 @@ class MealIngredient extends Migration
             $table->integer('id')->autoIncrement();
             $table->integer('meal_id');
             $table->integer('ingredient_id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('deleted_at')->nullable();
 
