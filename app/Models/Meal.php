@@ -12,6 +12,8 @@ class Meal extends Model
 
     protected $table = 'meal';
 
+    const UPDATED_AT = null;
+
     protected $fillable = [
         'name',
     ];

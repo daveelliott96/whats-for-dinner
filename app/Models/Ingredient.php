@@ -12,6 +12,8 @@ class Ingredient extends Model
 
     protected $table = 'ingredient';
 
+    const UPDATED_AT = null;
+
     protected $fillable = [
         'name',
     ];

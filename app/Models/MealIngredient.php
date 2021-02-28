@@ -10,7 +10,9 @@ class MealIngredient extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'meal';
+    protected $table = 'meal_ingredient';
+
+    const UPDATED_AT = null;
 
     protected $fillable = [
         'meal_id',
