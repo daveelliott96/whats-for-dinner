@@ -12,10 +12,28 @@ class WhatsForDinnerController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $meals = Meal::with('mealIngredient')->get();
+            $meals = Meal::with('ingredient')->get();
+
+            $formattedMealData = [];
+
+            foreach ($meals as $meal) {
+                $ingredients = [];
+                foreach ($meal->ingredient as $ingredient) {
+                    $ingredients[] = [
+                        'ingredient_id' => $ingredient->id,
+                        'ingredient_name' => $ingredient->name,
+                    ];
+                }
+
+                $formattedMealData[] = [
+                    'meal_id' => $meal->id,
+                    'meal_name' => $meal->name,
+                    'ingredients' => $ingredients,
+                ];
+            }
 
         return response()->json([
-            'data' => $meals,
+            'data' => $formattedMealData,
         ])->setStatusCode(200);
     }
 }
