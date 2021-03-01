@@ -17,11 +17,9 @@ class MealIngredient extends Migration
             $table->integer('id')->autoIncrement();
             $table->integer('meal_id');
             $table->integer('ingredient_id');
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('deleted_at')->nullable();
 
-            $table->foreign('meal_id')->references('id')->on('meal');
-            $table->foreign('ingredient_id')->references('id')->on('ingredient');
+            $table->foreign('meal_id')->references('id')->on('meal')->onDelete('cascade');;
+            $table->foreign('ingredient_id')->references('id')->on('ingredient')->onDelete('cascade');;
         });
     }
 
