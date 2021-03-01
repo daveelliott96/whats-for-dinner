@@ -15,4 +15,11 @@ You should now be able to go to `http://whatsfordinner.test`
 
 ## Setting up the database
 
-In your VM, run `php artisan migrate` to generate the database tables.
+1. Run `mysql`
+2. Run `CREATE DATABASE whats_for_dinner;` and then `exit`
+3. In your VM, run `php artisan migrate` to generate the database tables
+
+## Getting frontend assets in place
+
+1. Run `npm install`
+2. Run `npm run dev` for development. `npm run prod` for production
