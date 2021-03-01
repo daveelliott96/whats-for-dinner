@@ -2,26 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class MealIngredient extends Model
+class MealIngredient extends Pivot
 {
-    use SoftDeletes;
-
     protected $table = 'meal_ingredient';
+    public $incrementing = true;
 
     const UPDATED_AT = null;
+    const CREATED_AT = null;
 
     protected $fillable = [
         'meal_id',
         'ingredient_id'
-    ];
-
-    protected $dates = [
-        'created_at',
-        'deleted_at',
     ];
 
     protected $casts = [

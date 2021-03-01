@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Meal extends Model
@@ -28,8 +28,8 @@ class Meal extends Model
         'name' => 'string',
     ];
 
-    public function mealIngredient(): HasMany
+    public function ingredient(): BelongsToMany
     {
-        return $this->hasMany(MealIngredient::class, 'meal_id', 'id');
+        return $this->belongsToMany(Ingredient::class, 'meal_ingredient');
     }
 }
