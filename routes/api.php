@@ -15,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/meals', [WhatsForDinnerController::class, 'index']);
+
 Route::post('/meals', [WhatsForDinnerController::class, 'storeMeal']);
-Route::put('/meals', [WhatsForDinnerController::class, 'updateMeal']);
+
+Route::put('/meals/{id}', [WhatsForDinnerController::class, 'updateMeal'])
+    ->where(['id' => '[0-9]+']);
