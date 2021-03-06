@@ -4,5 +4,13 @@
 // Variables
 @import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: $body-bg;
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+}
