@@ -1,0 +1,58 @@
+import React from 'react'
+import styled from "styled-components"
+import { MealButton } from "./meal-button"
+import { EditButton } from "./edit-button"
+import { DeleteButton } from "./delete-button"
+import editIcon from '../../../../images/edit.svg'
+import deleteIcon from '../../../../images/delete.svg'
+
+const MealContainer = styled.div`
+  height: 128px;
+  width: 270px;
+  margin: 8px;
+  vertical-align: top;
+  display: flex;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+`
+
+const MealButtonContainer = styled.div`
+  margin-right: auto;
+  width: 76%;
+  height: 100%;
+`
+
+const ActionButtonsContainer = styled.div`
+  margin-left: auto;
+  width: 24%;
+  height: 100%;
+`
+
+const EditButtonContainer = styled.div`
+  width: 100%;
+  height: 50%;
+`
+
+const DeleteButtonContainer = styled.div`
+  width: 100%;
+  height: 50%;
+`
+
+export function Meal(props) {
+  return (
+    <MealContainer>
+      <MealButtonContainer>
+        <MealButton children={props.meal.meal_name}/>
+      </MealButtonContainer>
+      <ActionButtonsContainer>
+        <EditButtonContainer>
+          <EditButton icon={editIcon} children={'Edit'}/>
+        </EditButtonContainer>
+        <DeleteButtonContainer>
+          <DeleteButton icon={deleteIcon} children={'Delete'}/>
+        </DeleteButtonContainer>
+      </ActionButtonsContainer>
+    </MealContainer>
+  )
+}

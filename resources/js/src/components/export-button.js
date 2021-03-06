@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const Button = styled.button
   `
+  margin-left: auto;
   align-self: flex-end;
   width: 400px;
   height: 50px;

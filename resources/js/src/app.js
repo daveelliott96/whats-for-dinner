@@ -6,8 +6,7 @@ import { PageTitle } from "./components/page-title"
 import { PageHeader } from "./components/page-header"
 import { ButtonsContainer } from "./components/button-container"
 import { MainBody } from "./components/main-body"
-import { Meal } from "./components/meal"
-import { ExportButtonContainer } from "./components/export-button-container"
+import { Meal } from "./components/meal/meal"
 
 const axios = require('axios')
 
@@ -30,14 +29,12 @@ const App = () => {
       <ButtonsContainer>
         <CrudButton children={'Add new meal'}/>
         <CrudButton children={'Add new ingredient'}/>
-        <ExportButtonContainer>
           <ExportButton children={'Generate shopping list'}/>
-        </ExportButtonContainer>
       </ButtonsContainer>
       <MainBody>
         {meals.map(meal => {
           return (
-            <Meal key={meal.meal_id}/>
+            <Meal key={meal.meal_id} meal={meal}/>
           )
         })}
       </MainBody>

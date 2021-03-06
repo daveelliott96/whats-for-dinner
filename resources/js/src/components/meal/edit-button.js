@@ -1,0 +1,30 @@
+import React from 'react'
+import styled from "styled-components"
+
+const Button = styled.button`
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid black;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-top-right-radius: 5px;
+  background: #E3E3E3;
+  font-size: 1rem;
+  transition: .2s;
+  &:hover {
+    cursor: pointer;
+    background-color: #B93FE2;
+  }
+`
+
+export const EditButton = ({ children, onClick, ...props }) => (
+  <Button
+    onClick={onClick}
+    {...props}
+  >
+    {props.icon && <img src={props.icon} alt={'Edit icon'} style={{height: 32, width: 32}}/>}
+    {children}
+  </Button>
+)
+
