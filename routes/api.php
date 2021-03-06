@@ -15,3 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/meals', [WhatsForDinnerController::class, 'index']);
+Route::post('/meals', [WhatsForDinnerController::class, 'storeMeal']);
+Route::put('/meals', [WhatsForDinnerController::class, 'updateMeal']);
