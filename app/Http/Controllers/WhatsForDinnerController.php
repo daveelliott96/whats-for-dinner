@@ -91,10 +91,8 @@ class WhatsForDinnerController extends Controller
         return response()->noContent(Response::HTTP_CREATED);
     }
 
-    /* TODO: update meal route
-    public function updateMeal(Request $request, string $id): JsonResponse
+    public function updateMeal(Request $request, string $id): Response
     {
-
+        return response()->setStatusCode(Response::HTTP_NO_CONTENT);
     }
-    */
 }
