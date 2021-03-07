@@ -24,15 +24,15 @@ class PutMealRouteTest extends TestCase
 
     public function testItUpdatesAMealName()
     {
+        $nameBeforeUpdate  = 'Fajitas';
         $updatedName = 'Updated Fajitas';
 
         $updateData = [
-            'meal_id' => 1,
             'meal_name' => $updatedName,
         ];
 
         $mealBeforeUpdate = Meal::find(self::FAJITAS_MEAL_ID);
-        $this->assertSame('Fajitas', $mealBeforeUpdate->name);
+        $this->assertSame($nameBeforeUpdate, $mealBeforeUpdate->name);
 
         $response = $this->put(self::API_URL . 1, $updateData);
         $response->assertStatus(Response::HTTP_NO_CONTENT);

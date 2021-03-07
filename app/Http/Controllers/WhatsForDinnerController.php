@@ -93,6 +93,46 @@ class WhatsForDinnerController extends Controller
 
     public function updateMeal(Request $request, string $id): Response
     {
-        return response()->setStatusCode(Response::HTTP_NO_CONTENT);
+        $postData = $request->validate([
+            'meal_name' => 'string|max:255',
+            'ingredients' => 'array',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $mealId = (int) $id;
+
+            $mealToUpdate = Meal::find($mealId);
+
+            if (isset($postData['meal_name'])) {
+                $mealToUpdate->name = $postData['meal_name'];
+                $mealToUpdate->save();
+            }
+
+            if (isset($postData['ingredients'])) {
+                // Check which ingredients are already attached
+                $existingIngredients = [];
+                foreach ($mealToUpdate->ingredient as $existingIngredient) {
+                    $existingIngredients[] = $existingIngredient->id;
+                }
+
+                // Remove already attached ingredients from list of ingredients to attach
+                $ingredientsToAdd = array_diff($postData['ingredients'], $existingIngredients);
+
+                // Attach remaining ingredients
+                foreach ($ingredientsToAdd as $ingredientToAdd) {
+                    $mealToUpdate->ingredient()->attach($ingredientToAdd);
+                }
+            }
+        } catch (Exception $exception) {
+            Log::error('Cannot update meal: ' . $exception->getMessage());
+            DB::rollBack();
+            abort(Response::HTTP_INTERNAL_SERVER_ERROR, 'Cannot update meal: ' . $exception->getMessage());
+        }
+
+        DB::commit();
+
+        return response()->noContent();
     }
 }
