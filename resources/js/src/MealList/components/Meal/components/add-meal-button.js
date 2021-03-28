@@ -19,7 +19,7 @@ const Button = styled.button`
   }
 `
 
-export const MealButton = ({ children, onClick, ...props }) => (
+export const AddMealButton = ({ children, onClick, ...props }) => (
   <Button
     onClick={onClick}
     {...props}

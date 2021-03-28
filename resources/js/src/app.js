@@ -1,45 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { CrudButton } from "./components/crud-button"
 import '../../sass/app.css'
-import { ExportButton } from "./components/export-button"
-import { PageTitle } from "./components/page-title"
-import { PageHeader } from "./components/page-header"
-import { ButtonsContainer } from "./components/button-container"
-import { MainBody } from "./components/main-body"
-import { Meal } from "./components/meal/meal"
-
-const axios = require('axios')
+import MealList from "./MealList"
+import { getMeals } from "./api"
+import PageHeader from "./components/PageHeader"
 
 const App = () => {
   const [meals, setMeals] = useState([])
+  const [mealsLoading, setMealsLoading] = useState(true)
+
   useEffect(() => {
-    axios.get('api/meals')
-      .then(response => response.data)
-      .then(responseData => {
-        setMeals(responseData.data)
+    getMeals()
+      .then(data => {
+        setMeals(data)
+        setMealsLoading(false)
       })
   }, [])
 
-
   return (
     <>
-      <PageHeader>
-        <PageTitle title={"What's For Dinner?"}/>
-      </PageHeader>
-      <ButtonsContainer>
-        <CrudButton children={'Add new meal'}/>
-        <CrudButton children={'Add new ingredient'}/>
-          <ExportButton children={'Generate shopping list'}/>
-      </ButtonsContainer>
-      <MainBody>
-        {meals.map(meal => {
-          return (
-            <Meal key={meal.meal_id} meal={meal}/>
-          )
-        })}
-      </MainBody>
-
-
+      <PageHeader/>
+      {!mealsLoading && <MealList meals={meals}/>}
     </>
   )
 }

@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from "styled-components"
-import { MealButton } from "./meal-button"
-import { EditButton } from "./edit-button"
-import { DeleteButton } from "./delete-button"
-import editIcon from '../../../../images/edit.svg'
-import deleteIcon from '../../../../images/delete.svg'
+import { AddMealButton } from "./components/add-meal-button"
+import { EditButton } from "./components/edit-button"
+import { DeleteButton } from "./components/delete-button"
+import editIcon from '../../../../../images/edit.svg'
+import deleteIcon from '../../../../../images/delete.svg'
 
 const MealContainer = styled.div`
   height: 128px;
@@ -39,11 +39,11 @@ const DeleteButtonContainer = styled.div`
   height: 50%;
 `
 
-export function Meal(props) {
+export function Meal(meal) {
   return (
     <MealContainer>
       <MealButtonContainer>
-        <MealButton children={props.meal.meal_name}/>
+        <AddMealButton children={meal.meal.meal_name}/>
       </MealButtonContainer>
       <ActionButtonsContainer>
         <EditButtonContainer>

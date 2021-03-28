@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export const MainBody = styled.div`
+export const ListContainer = styled.div`
   padding: 0;
   margin: 4vh 8vw 0 8vw;
   list-style: none;
