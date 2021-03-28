@@ -3,6 +3,9 @@ import '../../sass/app.css'
 import MealList from "./MealList"
 import { getMeals } from "./api"
 import PageHeader from "./components/PageHeader"
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import CreateMealForm from "./CreateMealForm"
+import { MainBodyContainer } from "./components/main-body-container"
 
 const App = () => {
   const [meals, setMeals] = useState([])
@@ -19,7 +22,18 @@ const App = () => {
   return (
     <>
       <PageHeader/>
-      {!mealsLoading && <MealList meals={meals}/>}
+      <MainBodyContainer>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/create-meal">
+            <CreateMealForm />
+          </Route>
+          <Route path="/">
+            {!mealsLoading && <MealList meals={meals}/>}
+          </Route>
+        </Switch>
+      </BrowserRouter>
+      </MainBodyContainer>
     </>
   )
 }

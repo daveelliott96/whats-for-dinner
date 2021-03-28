@@ -6,7 +6,7 @@ import { ExportButton } from "./components/export-button"
 function CrudButtons() {
   return (
     <ButtonsContainer>
-      <CrudButton children={'Add new meal'}/>
+      <CrudButton linkTo={'/create-meal'} children={'Add new meal'}/>
       <CrudButton children={'Add new ingredient'}/>
       <ExportButton children={'Generate shopping list'}/>
     </ButtonsContainer>

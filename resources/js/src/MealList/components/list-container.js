@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const ListContainer = styled.div`
   padding: 0;
-  margin: 4vh 8vw 0 8vw;
+  margin-top: 2rem;
   list-style: none;
   display: flex;
   flex-wrap: wrap;

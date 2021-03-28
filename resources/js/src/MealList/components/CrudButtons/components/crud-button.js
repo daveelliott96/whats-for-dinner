@@ -1,5 +1,6 @@
 import React from "react"
 import styled from 'styled-components'
+import { Link } from "react-router-dom"
 
 const Button = styled.button
   `
@@ -21,11 +22,12 @@ const Button = styled.button
   }
   `
 
-export const CrudButton = ({ children, onClick, ...props }) => (
-  <Button
-    onClick={onClick}
-    {...props}
-  >
-    {children}
-  </Button>
+export const CrudButton = ({ children, linkTo, ...props }) => (
+  <Link to={linkTo}>
+    <Button
+      {...props}
+    >
+      {children}
+    </Button>
+  </Link>
 )
