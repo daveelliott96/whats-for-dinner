@@ -14,7 +14,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class WhatsForDinnerController extends Controller
+class MealsController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
@@ -43,7 +43,7 @@ class WhatsForDinnerController extends Controller
         ])->setStatusCode(Response::HTTP_OK);
     }
 
-    public function storeMeal(Request $request): Response
+    public function store(Request $request): Response
     {
         $postData = $request->validate([
             'meal_name' => 'required|string|max:255',
@@ -91,7 +91,7 @@ class WhatsForDinnerController extends Controller
         return response()->noContent(Response::HTTP_CREATED);
     }
 
-    public function updateMeal(Request $request, string $id): Response
+    public function update(Request $request, string $id): Response
     {
         $postData = $request->validate([
             'meal_name' => 'string|max:255',

@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\WhatsForDinnerController;
+use App\Http\Controllers\IngredientsController;
+use App\Http\Controllers\MealsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,13 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group(['prefix' => 'meals'], function() {
+    Route::get('', [MealsController::class, 'index']);
+    Route::post('', [MealsController::class, 'store']);
+    Route::put('/{id}', [MealsController::class, 'update'])
+        ->where(['id' => '[0-9]+']);
+});
 
-Route::get('/meals', [WhatsForDinnerController::class, 'index']);
-
-Route::post('/meals', [WhatsForDinnerController::class, 'storeMeal']);
-
-Route::put('/meals/{id}', [WhatsForDinnerController::class, 'updateMeal'])
-    ->where(['id' => '[0-9]+']);
+Route::group(['prefix' => 'ingredients'], function () {
+    Route::get('', [IngredientsController::class, 'index']);
+});
