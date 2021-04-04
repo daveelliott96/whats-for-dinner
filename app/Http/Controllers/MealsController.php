@@ -40,10 +40,10 @@ class MealsController extends Controller
 
         return response()->json([
             'data' => $formattedMealData,
-        ])->setStatusCode(Response::HTTP_OK);
+        ])->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function store(Request $request): Response
+    public function store(Request $request): JsonResponse
     {
         $postData = $request->validate([
             'meal_name' => 'required|string|max:255',
@@ -76,6 +76,21 @@ class MealsController extends Controller
                     $meal->ingredient()->attach($existingIngredient->id);
                 }
             }
+
+            $ingredients = [];
+            foreach ($meal->ingredient as $ingredient) {
+                $ingredients[] = [
+                    'ingredient_id' => $ingredient->id,
+                    'ingredient_name' => $ingredient->name,
+                ];
+            }
+
+            $formattedMealData = [
+                'meal_id' => $meal->id,
+                'meal_name' => $meal->name,
+                'ingredients' => $ingredients,
+            ];
+
         } catch (DuplicateDatabaseEntryException $exception) {
             Log::error($exception->getMessage());
             DB::rollBack();
@@ -88,7 +103,9 @@ class MealsController extends Controller
 
         DB::commit();
 
-        return response()->noContent(Response::HTTP_CREATED);
+        return response()->json([
+            'data' => [$formattedMealData],
+        ])->setStatusCode(Response::HTTP_CREATED);
     }
 
     public function update(Request $request, string $id): Response

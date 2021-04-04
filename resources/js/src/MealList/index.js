@@ -9,9 +9,9 @@ function MealList(meals) {
     <>
       <CrudButtons/>
       <ListContainer>
-        {!meals.meals.length && <NoMealsMessage/>}
+        {meals.meals.length === 0 && <NoMealsMessage/>}
         {
-          meals.meals.length &&
+          meals.meals.length > 0 &&
           meals.meals.map(meal => {
             return (
               <Meal key={meal.meal_id} meal={meal}/>

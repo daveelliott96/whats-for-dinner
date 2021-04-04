@@ -7,3 +7,7 @@ export const getMeals = () =>
 export const getIngredients = () =>
   get(`/api/ingredients`)
     .then(response => response.data.data)
+
+export const createMeal = (details) =>
+  post(`/api/meals`, details)
+    .then(response => response.data.data[0])

@@ -30,11 +30,9 @@ class PostMealRouteTest extends TestCase
             'ingredients' => [
                 'Chicken Breast',
                 'Peppers',
-                'Onion'
+                'Onion',
             ],
         ]);
-
-        $response->assertStatus(Response::HTTP_CREATED);
 
         $meal = Meal::where('name', 'This is a test meal yum')->first();
 
@@ -52,6 +50,34 @@ class PostMealRouteTest extends TestCase
             $actualIngredients[] = $ingredient->name;
         }
 
+        $expectedBody = [
+            'data' => [
+                [
+                    'meal_id' => 4,
+                    'meal_name' => 'This is a test meal yum',
+                    'ingredients' => [
+                        [
+                            'ingredient_id' => 1,
+                            'ingredient_name' => 'Chicken Breast',
+                        ],
+                        [
+                            'ingredient_id' => 3,
+                            'ingredient_name' => 'Peppers',
+                        ],
+                        [
+                            'ingredient_id' => 4,
+                            'ingredient_name' => 'Onion',
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $body = json_decode((string) $response->getContent(), true);
+
+        $this->assertSame($expectedBody, $body);
+
+        $response->assertStatus(Response::HTTP_CREATED);
         $this->assertSame($expectedIngredients, $actualIngredients);
     }
 
