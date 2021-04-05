@@ -40,7 +40,7 @@ class MealsController extends Controller
 
         return response()->json([
             'data' => $formattedMealData,
-        ])->setStatusCode(Response::HTTP_CREATED);
+        ])->setStatusCode(Response::HTTP_OK);
     }
 
     public function store(Request $request): JsonResponse
