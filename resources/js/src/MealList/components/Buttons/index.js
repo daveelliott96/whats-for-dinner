@@ -1,16 +1,15 @@
 import React from "react"
 import { ButtonsContainer } from "./components/button-container"
-import { CrudButton } from "./components/crud-button"
 import { ExportButton } from "./components/export-button"
+import { NavigationButton } from "../../../components/navigation-button"
 
-function CrudButtons() {
+function Buttons() {
   return (
     <ButtonsContainer>
-      <CrudButton linkTo={'/create-meal'} children={'Create new meal'}/>
-      <CrudButton linkTo={'/create-ingredient'} children={'Create new ingredient'}/>
+      <NavigationButton linkTo={'/create-meal'} children={'Create new meal'}/>
       <ExportButton linkTo={'/export'} children={'Generate shopping list'}/>
     </ButtonsContainer>
   )
 }
 
-export default CrudButtons
+export default Buttons

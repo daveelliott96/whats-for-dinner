@@ -1,19 +1,14 @@
-import React, { useReducer, useState, useEffect } from 'react'
-import CreatableSelect from 'react-select/creatable'
+import React, { useReducer } from 'react'
+import { useHistory } from "react-router-dom"
+import { NavigationButton } from "../components/navigation-button"
+import AddForm from "./components/add-form"
 import styled from "styled-components"
-import { Link, useHistory } from "react-router-dom"
-import { createMeal } from "../api"
 
-const Fieldset = styled.fieldset`
-  border: none;
-  padding: 0;
-  padding-top: 0.5rem;
+export const ButtonsContainer = styled.div`
+  display:flex;
+  flex-wrap: wrap;
 `
 
-const Legend = styled.legend`
-  font-weight: bold;
-  font-size: 0.85rem;
-`
 
 const initialState = {
   mealName: '',
@@ -39,38 +34,12 @@ function CreateMealForm({ onSubmit, ingredients }) {
     history.push('/')
   }
 
-  const options = ingredients.map(ingredient => {
-    return { value: ingredient.ingredient_name, label: ingredient.ingredient_name }
-  })
-
   return (
     <>
-      <Link to={'/'}>
-        <button>Back to meal list</button>
-      </Link>
-
-      <form onSubmit={handleSubmit}>
-        <Fieldset>
-          <Legend>
-            Create new meal
-          </Legend>
-
-          <label htmlFor={'mealName'}>Meal Name</label>
-          <input
-            type={'text'}
-            name={'mealName'}
-            onChange={(e) => dispatch({ field: 'mealName', value: e.target.value })}/>
-          <label htmlFor={'mealIngredients'}>Ingredients</label>
-          <CreatableSelect
-            id={'mealIngredients'}
-            options={options}
-            isMulti
-            closeMenuOnSelect={false}
-            onChange={(e) => dispatch({ field: 'mealIngredients', value: e })}
-          />
-          <button type={'submit'}>Save meal</button>
-        </Fieldset>
-      </form>
+      <ButtonsContainer>
+        <NavigationButton children={'Back to meal list'} linkTo={'/'}/>
+      </ButtonsContainer>
+      <AddForm onFormSubmit={handleSubmit} ingredients={ingredients} dispatch={dispatch}/>
     </>
   )
 }

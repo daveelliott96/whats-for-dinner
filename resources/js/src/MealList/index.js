@@ -1,13 +1,13 @@
 import { ListContainer } from "./components/list-container"
 import React from "react"
 import { Meal } from "./components/Meal"
-import CrudButtons from "./components/CrudButtons"
+import Buttons from "./components/Buttons"
 import { NoMealsMessage } from "./components/no-meals-message"
 
 function MealList(meals) {
   return (
     <>
-      <CrudButtons/>
+      <Buttons/>
       <ListContainer>
         {meals.meals.length === 0 && <NoMealsMessage/>}
         {

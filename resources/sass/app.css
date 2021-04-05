@@ -9,4 +9,20 @@ body {
   margin: 0;
 }
 
+::-webkit-input-placeholder {
+  font-family: Helvetica, sans-serif;
+}
+
+:-moz-placeholder {
+  font-family: Helvetica, sans-serif;
+}
+
+::-moz-placeholder {
+  font-family: Helvetica, sans-serif;
+}
+
+:-ms-input-placeholder {
+  font-family: Helvetica, sans-serif;
+}
+
 /*# sourceMappingURL=app.css.map */

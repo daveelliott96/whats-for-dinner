@@ -1,6 +1,6 @@
 import React from "react"
 import styled from 'styled-components'
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 
 const Button = styled.button
   `
@@ -22,12 +22,15 @@ const Button = styled.button
   }
   `
 
-export const CrudButton = ({ children, linkTo, ...props }) => (
-  <Link to={linkTo}>
-    <Button
-      {...props}
-    >
-      {children}
-    </Button>
-  </Link>
-)
+export function NavigationButton({ children, linkTo, ...props }) {
+  const history = useHistory()
+
+  return (
+      <Button
+        onClick={() => history.push(linkTo)}
+        {...props}
+      >
+        {children}
+      </Button>
+  )
+}

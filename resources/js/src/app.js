@@ -13,23 +13,7 @@ const App = () => {
   const [ingredients, setIngredients] = useState([])
   const [ingredientsLoading, setIngredientsLoading] = useState(true)
   const [newMealSaved, setNewMealSaved] = useState(false)
-
-  const addNewMeal = formData => {
-    let ingredients = formData.mealIngredients.map(ingredient => {
-      return ingredient.value
-    })
-
-    const requestBody = {
-      meal_name: formData.mealName,
-      ingredients: ingredients
-    }
-
-    createMeal(requestBody)
-      .then(data => {
-        setMeals([...meals, data])
-        setNewMealSaved(true)
-      })
-  }
+  const [selectedMeals, setSelectedMeals] = useState([])
 
   useEffect(() => {
     getMeals()
@@ -60,6 +44,23 @@ const App = () => {
     }
   }, [newMealSaved])
 
+  const addNewMeal = formData => {
+    let ingredients = formData.mealIngredients.map(ingredient => {
+      return ingredient.value
+    })
+
+    const requestBody = {
+      meal_name: formData.mealName,
+      ingredients: ingredients
+    }
+
+    createMeal(requestBody)
+      .then(data => {
+        setMeals([...meals, data])
+        setNewMealSaved(true)
+      })
+  }
+
   return (
     <>
       <PageHeader/>
@@ -70,7 +71,6 @@ const App = () => {
               {!ingredientsLoading && <CreateMealForm ingredients={ingredients} onSubmit={addNewMeal}/>}
             </Route>
             <Route path="/">
-              {console.log(meals)}
               {!mealsLoading && <MealList meals={meals}/>}
             </Route>
           </Switch>
