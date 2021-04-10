@@ -8,20 +8,21 @@ const Button = styled.button`
   border-left: 0;
   border-top: 0;
   border-bottom: 0;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  font-size: 1.5rem;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  font-size: 1.4rem;
   background: #E3E3E3;
   transition: .2s;
+  overflow: hidden;
   &:hover {
     cursor: pointer;
     background-color: #53A00A;
   }
 `
 
-export const AddMealButton = ({ children, onClick, ...props }) => (
+export const AddMealButton = ({ children, addToShoppingList, ...props }) => (
   <Button
-    onClick={onClick}
+    onClick={() => addToShoppingList(children)}
     {...props}
   >
     {children}

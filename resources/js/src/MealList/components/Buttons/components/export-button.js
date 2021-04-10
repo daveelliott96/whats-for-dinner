@@ -1,5 +1,6 @@
 import React from "react"
 import styled from 'styled-components'
+import { useHistory } from "react-router-dom"
 
 const Button = styled.button
   `
@@ -20,11 +21,15 @@ const Button = styled.button
   }
   `
 
-export const ExportButton = ({ children, onClick, ...props }) => (
-  <Button
-    onClick={onClick}
-    {...props}
-  >
-    {children}
-  </Button>
-)
+export function ExportButton({ children, linkTo, ...props }) {
+  const history = useHistory()
+
+  return (
+    <Button
+      onClick={() => history.push(linkTo)}
+      {...props}
+    >
+      {children}
+    </Button>
+  )
+}

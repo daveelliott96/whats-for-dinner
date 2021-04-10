@@ -6,6 +6,7 @@ import PageHeader from "./components/PageHeader"
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import CreateMealForm from "./CreateMealForm"
 import { MainBodyContainer } from "./components/main-body-container"
+import ShoppingList from "./ShoppingList"
 
 const App = () => {
   const [meals, setMeals] = useState([])
@@ -21,11 +22,13 @@ const App = () => {
         setMeals(data)
         setMealsLoading(false)
       })
+    // TODO: Error handling
     getIngredients()
       .then(data => {
         setIngredients(data)
         setIngredientsLoading(false)
       })
+    // TODO: Error handling
   }, [])
 
   useEffect(() => {
@@ -35,12 +38,15 @@ const App = () => {
           setMeals(data)
           setMealsLoading(false)
         })
+      // TODO: Error handling
       getIngredients()
         .then(data => {
           setIngredients(data)
           setIngredientsLoading(false)
         })
       setNewMealSaved(false)
+      // TODO: Error handling
+
     }
   }, [newMealSaved])
 
@@ -61,6 +67,18 @@ const App = () => {
       })
   }
 
+  const addToShoppingList = (mealName) => {
+    let meal = meals.find(meal => meal.meal_name === mealName)
+
+    if (selectedMeals.find(selectedMeal => selectedMeal === meal)) {
+      // TODO: Add messaging to tell the user they've already added this meal
+      return
+    }
+
+    setSelectedMeals([...selectedMeals, meal])
+    // TODO Add confirmation that meal was added to shopping list
+  }
+
   return (
     <>
       <PageHeader/>
@@ -70,8 +88,11 @@ const App = () => {
             <Route path="/create-meal">
               {!ingredientsLoading && <CreateMealForm ingredients={ingredients} onSubmit={addNewMeal}/>}
             </Route>
+            <Route path="/shopping-list">
+              {<ShoppingList selectedMeals={selectedMeals}/>}
+            </Route>
             <Route path="/">
-              {!mealsLoading && <MealList meals={meals}/>}
+              {!mealsLoading && <MealList meals={meals} addToShoppingList={addToShoppingList}/>}
             </Route>
           </Switch>
         </BrowserRouter>

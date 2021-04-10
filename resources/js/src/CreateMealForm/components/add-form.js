@@ -29,6 +29,7 @@ const AddForm = ({ingredients, onFormSubmit, dispatch}) => {
     return { value: ingredient.ingredient_name, label: ingredient.ingredient_name }
   })
 
+  // TODO: Add validation to fields: required, length, type etc.
   return (
     <FormContainer>
       <Form>
