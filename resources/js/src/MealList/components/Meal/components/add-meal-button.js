@@ -16,7 +16,7 @@ const Button = styled.button`
   overflow: hidden;
   &:hover {
     cursor: pointer;
-    background-color: #53A00A;
+    background-color: #33955D;
   }
 `
 

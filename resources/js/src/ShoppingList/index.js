@@ -3,6 +3,7 @@ import { NavigationButton } from "../components/navigation-button"
 import styled from "styled-components"
 import { ExportButton } from "../MealList/components/Buttons/components/export-button"
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import Meal from "./components/Meal"
 
 export const ButtonsContainer = styled.div`
   display:flex;
@@ -11,7 +12,7 @@ export const ButtonsContainer = styled.div`
 `
 
 function ShoppingList({ selectedMeals }) {
-  const [shoppingList, setShoppingList] = useState('')
+  const [shoppingList, setShoppingList] = useState([])
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
@@ -37,26 +38,17 @@ function ShoppingList({ selectedMeals }) {
     <>
       <ButtonsContainer>
         <NavigationButton children={'Back to meal list'} linkTo={'/'}/>
-        <CopyToClipboard text={shoppingList} onCopy={() => setCopied(true)}>
-          <ExportButton children={'Copy shopping list to clipboard'}/>
-        </CopyToClipboard>
+        {
+          shoppingList.length > 0 && <CopyToClipboard text={shoppingList} onCopy={() => setCopied(true)}>
+            <ExportButton children={'Copy shopping list to clipboard'}/>
+          </CopyToClipboard>
+        }
       </ButtonsContainer>
       <p>You've added {selectedMeals.length} {selectedMeals.length === 1 ? 'meal' : 'meals'} to your shopping list:</p>
       {
         selectedMeals.map(meal => {
           return (
-            <>
-              <p>{meal.meal_name}</p>
-              <ul>
-                {
-                  meal.ingredients.map(ingredient => {
-                    return (
-                      <li>{ingredient.ingredient_name}</li>
-                    )
-                  })
-                }
-              </ul>
-            </>
+              <Meal meal={meal}/>
           )
         })
       }
