@@ -52,7 +52,10 @@ const App = () => {
 
   const addNewMeal = formData => {
     let ingredients = formData.mealIngredients.map(ingredient => {
-      return ingredient.value
+      return {
+        ingredient_id: ingredient.value,
+        ingredient_name: ingredient.label
+      }
     })
 
     const requestBody = {

@@ -22,6 +22,7 @@ class IngredientsController extends Controller
 
         $formattedIngredientData = $ingredients->map(function ($ingredient) {
             return [
+                'ingredient_id' => $ingredient->id,
                 'ingredient_name' => $ingredient->name,
             ];
         });

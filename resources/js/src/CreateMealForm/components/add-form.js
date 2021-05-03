@@ -26,7 +26,7 @@ const Form = styled.form`
 
 const AddForm = ({ingredients, onFormSubmit, dispatch}) => {
   const options = ingredients.map(ingredient => {
-    return { value: ingredient.ingredient_name, label: ingredient.ingredient_name }
+    return { value: ingredient.ingredient_id, label: ingredient.ingredient_name }
   })
 
   // TODO: Add validation to fields: required, length, type etc.
@@ -50,7 +50,7 @@ const AddForm = ({ingredients, onFormSubmit, dispatch}) => {
             options={options}
             isMulti
             closeMenuOnSelect={false}
-            onChange={(e) => dispatch({ field: 'mealIngredients', value: e })}
+            onChange={e => dispatch({ field: 'mealIngredients', value: e })}
           />
           <SubmitButton onSubmit={onFormSubmit}>Save meal</SubmitButton>
         </Fieldset>

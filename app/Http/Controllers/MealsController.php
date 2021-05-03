@@ -63,12 +63,12 @@ class MealsController extends Controller
                 'name' => $postData['meal_name'],
             ]);
 
-            foreach ($postData['ingredients'] as $ingredientName) {
-                $existingIngredient = Ingredient::where('name', $ingredientName)->first();
+            foreach ($postData['ingredients'] as $ingredient) {
+                $existingIngredient = Ingredient::find($ingredient['ingredient_id']);
 
                 if ($existingIngredient === null) {
                     $ingredient = Ingredient::create([
-                        'name' => $ingredientName,
+                        'name' => $ingredient['ingredient_name'],
                     ]);
 
                     $meal->ingredient()->attach($ingredient->id);
@@ -91,6 +91,8 @@ class MealsController extends Controller
                 'ingredients' => $ingredients,
             ];
 
+            DB::commit();
+
         } catch (DuplicateDatabaseEntryException $exception) {
             Log::error($exception->getMessage());
             DB::rollBack();
@@ -100,8 +102,6 @@ class MealsController extends Controller
             DB::rollBack();
             abort(Response::HTTP_INTERNAL_SERVER_ERROR, 'Cannot save meal: ' . $exception->getMessage());
         }
-
-        DB::commit();
 
         return response()->json([
             'data' => [$formattedMealData],
