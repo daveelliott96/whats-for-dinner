@@ -39,7 +39,7 @@ const DeleteButtonContainer = styled.div`
   height: 50%;
 `
 
-export function Meal({meal, addToShoppingList}) {
+export function Meal({meal, addToShoppingList, deleteMeal}) {
   return (
     <MealContainer>
       <MealButtonContainer>
@@ -50,7 +50,7 @@ export function Meal({meal, addToShoppingList}) {
           <EditButton linkTo={'/edit-meal'} icon={editIcon} children={'Edit'}/>
         </EditButtonContainer>
         <DeleteButtonContainer>
-          <DeleteButton icon={deleteIcon} children={'Delete'}/>
+          <DeleteButton icon={deleteIcon} children={'Delete'} mealId={meal.meal_id} onClick={deleteMeal}/>
         </DeleteButtonContainer>
       </ActionButtonsContainer>
     </MealContainer>

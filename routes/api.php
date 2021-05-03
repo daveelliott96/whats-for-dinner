@@ -19,6 +19,8 @@ Route::group(['prefix' => 'meals'], function() {
     Route::post('', [MealsController::class, 'store']);
     Route::put('/{id}', [MealsController::class, 'update'])
         ->where(['id' => '[0-9]+']);
+    Route::delete('/{id}', [MealsController::class, 'delete'])
+        ->where(['id' => '[0-9]+']);
 });
 
 Route::group(['prefix' => 'ingredients'], function () {

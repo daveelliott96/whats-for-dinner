@@ -9,7 +9,6 @@ export const ButtonsContainer = styled.div`
   flex-wrap: wrap;
 `
 
-
 const initialState = {
   mealName: '',
   mealIngredients: []

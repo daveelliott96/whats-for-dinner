@@ -15,7 +15,7 @@ export const ListContainer = styled.div`
   clear: both;
 `
 
-function MealList({meals, addToShoppingList}) {
+function MealList({meals, addToShoppingList, deleteMeal}) {
   return (
     <>
       <Buttons />
@@ -26,7 +26,7 @@ function MealList({meals, addToShoppingList}) {
           meals.length > 0 &&
           meals.map(meal => {
             return (
-              <Meal key={meal.meal_id} meal={meal} addToShoppingList={addToShoppingList}/>
+              <Meal key={meal.meal_id} meal={meal} addToShoppingList={addToShoppingList} deleteMeal={deleteMeal}/>
             )
           })
         }

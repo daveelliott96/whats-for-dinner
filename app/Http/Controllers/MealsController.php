@@ -152,4 +152,16 @@ class MealsController extends Controller
 
         return response()->noContent();
     }
+
+    public function delete(Request $request, string $id): Response
+    {
+        $mealId = (int) $id;
+
+        $meal = Meal::find($mealId);
+
+        $meal->ingredient()->detach();
+        $meal->delete();
+
+        return response()->noContent();
+    }
 }

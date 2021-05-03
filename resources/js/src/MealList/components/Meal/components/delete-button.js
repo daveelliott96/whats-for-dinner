@@ -18,9 +18,9 @@ const Button = styled.button`
   }
 `
 
-export const DeleteButton = ({ children, onClick, ...props }) => (
+export const DeleteButton = ({ children, onClick, mealId, ...props }) => (
   <Button
-    onClick={onClick}
+    onClick={() => onClick(mealId)}
     {...props}
   >
     {props.icon && <img src={props.icon} alt={'Delete icon'} style={{height: 32, width: 32}}/>}

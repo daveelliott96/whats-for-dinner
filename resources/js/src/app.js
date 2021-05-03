@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../../sass/app.css'
 import MealList from "./MealList"
-import { createMeal, getIngredients, getMeals } from "./api"
+import { createMeal, getIngredients, getMeals, deleteMeal as deleteMealFromDb } from "./api"
 import PageHeader from "./components/PageHeader"
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import CreateMealForm from "./CreateMealForm"
@@ -100,6 +100,14 @@ const App = () => {
       })
   }
 
+  const deleteMeal = (mealId) => {
+    deleteMealFromDb(mealId)
+
+    setMeals(meals.filter(meal => {
+      return meal.meal_id !== mealId
+    }))
+  }
+
   return (
     <>
       <PageHeader/>
@@ -116,7 +124,7 @@ const App = () => {
               {<ShoppingList selectedMeals={selectedMeals}/>}
             </Route>
             <Route path="/">
-              {!mealsLoading && <MealList meals={meals} addToShoppingList={addToShoppingList}/>}
+              {!mealsLoading && <MealList meals={meals} addToShoppingList={addToShoppingList} deleteMeal={deleteMeal}/>}
             </Route>
           </Switch>
         </BrowserRouter>

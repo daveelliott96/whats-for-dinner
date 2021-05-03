@@ -11,3 +11,7 @@ export const getIngredients = () =>
 export const createMeal = (details) =>
   post(`/api/meals`, details)
     .then(response => response.data.data[0])
+
+export const deleteMeal = (mealId) => {
+  destroy(`api/meals/${mealId}`)
+}
