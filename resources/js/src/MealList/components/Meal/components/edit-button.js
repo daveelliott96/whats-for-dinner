@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components"
+import { useHistory } from "react-router-dom"
 
 const Button = styled.button`
   width: 100%;
@@ -18,13 +19,17 @@ const Button = styled.button`
   }
 `
 
-export const EditButton = ({ children, onClick, ...props }) => (
-  <Button
-    onClick={onClick}
-    {...props}
-  >
-    {props.icon && <img src={props.icon} alt={'Edit icon'} style={{height: 32, width: 32}}/>}
-    {children}
-  </Button>
-)
+export function EditButton({ children, linkTo, ...props }) {
+  const history = useHistory()
+
+  return (
+    <Button
+      onClick={() => history.push(linkTo)}
+      {...props}
+    >
+      {props.icon && <img src={props.icon} alt={'Edit icon'} style={{ height: 32, width: 32 }}/>}
+      {children}
+    </Button>
+  )
+}
 

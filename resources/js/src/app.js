@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import CreateMealForm from "./CreateMealForm"
 import { MainBodyContainer } from "./components/main-body-container"
 import ShoppingList from "./ShoppingList"
+import EditMealForm from "./EditMealForm"
 
 const App = () => {
   const [meals, setMeals] = useState([])
@@ -82,6 +83,23 @@ const App = () => {
     // TODO Add confirmation that meal was added to shopping list
   }
 
+  const updateMeal = formData => {
+    let ingredients = formData.mealIngredients.map(ingredient => {
+      return ingredient.value
+    })
+
+    const requestBody = {
+      meal_name: formData.mealName,
+      ingredients: ingredients
+    }
+
+    createMeal(requestBody)
+      .then(data => {
+        setMeals([...meals, data])
+        setNewMealSaved(true)
+      })
+  }
+
   return (
     <>
       <PageHeader/>
@@ -90,6 +108,9 @@ const App = () => {
           <Switch>
             <Route path="/create-meal">
               {!ingredientsLoading && <CreateMealForm ingredients={ingredients} onSubmit={addNewMeal}/>}
+            </Route>
+            <Route path="/edit-meal">
+              {!mealsLoading && <EditMealForm meals={meals} onSubmit={updateMeal}/>}
             </Route>
             <Route path="/shopping-list">
               {<ShoppingList selectedMeals={selectedMeals}/>}
