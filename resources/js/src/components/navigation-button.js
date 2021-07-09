@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom"
 
 const Button = styled.button
   `
-  align-self: flex-end;
+  align-self: flex-start;
   width: 300px;
   height: 50px;
   float: left;
