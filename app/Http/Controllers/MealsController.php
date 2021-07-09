@@ -115,14 +115,14 @@ class MealsController extends Controller
             'ingredients' => 'array',
         ]);
 
-        DB::beginTransaction();
+        $mealId = (int) $id;
 
         try {
-            $mealId = (int) $id;
+            DB::beginTransaction();
 
-            $mealToUpdate = Meal::find($mealId);
+            $mealToUpdate = Meal::findOrFail($mealId);
 
-            if (isset($postData['meal_name'])) {
+            if (isset($postData['meal_name']) && $postData['meal_name'] !== $mealToUpdate->name) {
                 $mealToUpdate->name = $postData['meal_name'];
                 $mealToUpdate->save();
             }
@@ -131,21 +131,28 @@ class MealsController extends Controller
                 // Check which ingredients are already attached
                 $existingIngredients = [];
                 foreach ($mealToUpdate->ingredient as $existingIngredient) {
-                    $existingIngredients[] = $existingIngredient->id;
+                    $existingIngredients[] = $existingIngredient->name;
                 }
 
-                // Remove already attached ingredients from list of ingredients to attach
+                // Get list of ingredients to add or remove from meal
                 $ingredientsToAdd = array_diff($postData['ingredients'], $existingIngredients);
+                $ingredientsToRemove = array_diff($existingIngredients, $postData['ingredients']);
 
-                // Attach remaining ingredients
+                // Add new ingredients to meal
                 foreach ($ingredientsToAdd as $ingredientToAdd) {
-                    $mealToUpdate->ingredient()->attach($ingredientToAdd);
+                    $ingredient = Ingredient::firstOrCreate(['name' => $ingredientToAdd]);
+                    $mealToUpdate->ingredient()->attach($ingredient->id);
+                }
+
+                foreach ($ingredientsToRemove as $ingredientToRemove) {
+                    $ingredient = Ingredient::where('name', $ingredientToRemove)->firstOrFail();
+                    $mealToUpdate->ingredient()->detach($ingredient->id);
                 }
             }
         } catch (Exception $exception) {
-            Log::error('Cannot update meal: ' . $exception->getMessage());
+            Log::error('Cannot update meal: ' . $exception->getMessage() . ' in ' . $exception->getFile() . ' on line ' . $exception->getLine());
             DB::rollBack();
-            abort(Response::HTTP_INTERNAL_SERVER_ERROR, 'Cannot update meal: ' . $exception->getMessage());
+            abort(Response::HTTP_INTERNAL_SERVER_ERROR, 'Cannot update meal');
         }
 
         DB::commit();

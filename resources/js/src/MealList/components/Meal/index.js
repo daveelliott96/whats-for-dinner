@@ -47,7 +47,7 @@ export function Meal({meal, addToShoppingList, deleteMeal}) {
       </MealButtonContainer>
       <ActionButtonsContainer>
         <EditButtonContainer>
-          <EditButton linkTo={'/edit-meal'} icon={editIcon} children={'Edit'}/>
+          <EditButton linkTo={'/edit-meal'} icon={editIcon} children={'Edit'} meal={meal}/>
         </EditButtonContainer>
         <DeleteButtonContainer>
           <DeleteButton icon={deleteIcon} children={'Delete'} mealId={meal.meal_id} onClick={deleteMeal}/>

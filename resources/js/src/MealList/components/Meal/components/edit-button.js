@@ -19,15 +19,15 @@ const Button = styled.button`
   }
 `
 
-export function EditButton({ children, linkTo, ...props }) {
+export function EditButton({ children, linkTo, meal, icon, ...props }) {
   const history = useHistory()
 
   return (
     <Button
-      onClick={() => history.push(linkTo)}
+      onClick={() => history.push(linkTo, {meal, ...props})}
       {...props}
     >
-      {props.icon && <img src={props.icon} alt={'Edit icon'} style={{ height: 32, width: 32 }}/>}
+      {icon && <img src={icon} alt={'Edit icon'} style={{ height: 32, width: 32 }}/>}
       {children}
     </Button>
   )
