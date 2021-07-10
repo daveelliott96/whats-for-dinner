@@ -24,6 +24,10 @@ const MealNameContainer = styled.div`
   padding-bottom: 0rem;
   display: flex;
   align-items: center;
+  
+  @media only screen and (max-width: 992px) {
+    height: 3rem;
+  }
 `
 
 const MealIngredientsContainer = styled.div`
@@ -43,6 +47,10 @@ const MealName = styled.h2`
   font-weight: normal;
   font-size: 2rem;
   padding: 0;
+  
+  @media only screen and (max-width: 992px) {
+    font-size: 1.5rem;
+  }
 `
 
 const IngredientList = styled.ul`
@@ -52,6 +60,10 @@ const IngredientList = styled.ul`
   padding-bottom: .2rem;
   color: #24265A;
   font-size: 1.3rem;
+  
+  @media only screen and (max-width: 992px) {
+    font-size: 1rem;
+  }
 `
 
 const IngredientListItem = styled.li`

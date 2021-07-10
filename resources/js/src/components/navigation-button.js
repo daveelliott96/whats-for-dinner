@@ -1,6 +1,6 @@
 import React from "react"
 import styled from 'styled-components'
-import { Link, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 const Button = styled.button`
   align-self: flex-start;
@@ -21,7 +21,7 @@ const Button = styled.button`
   @media only screen and (max-width: 992px) {
     align-self: center;
   }
-  `
+`
 
 export function NavigationButton({ children, linkTo, ...props }) {
   const history = useHistory()

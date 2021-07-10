@@ -7,8 +7,13 @@ import Meal from "./components/Meal"
 
 export const ButtonsContainer = styled.div`
   display:flex;
+  flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 1.5rem;
+
+  @media only screen and (max-width: 992px) {
+    flex-direction: column;
+  }
 `
 
 function ShoppingList({ selectedMeals }) {

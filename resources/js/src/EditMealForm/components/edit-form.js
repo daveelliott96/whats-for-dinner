@@ -25,6 +25,18 @@ const Form = styled.form`
   width: 100%;
 `
 
+
+export const ButtonContainer = styled.div`
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+
+  @media only screen and (max-width: 992px) {
+    flex-direction: column;
+  }
+`
+
 function reducer(state, action) {
   return {
     ...state,
@@ -90,7 +102,9 @@ const EditForm = ({ meal, availableIngredients, onSubmit }) => {
             onChange={e => dispatch({ field: 'mealIngredients', value: e })}
             defaultValue={initialValue}
           />
-          <SubmitButton onSubmit={handleSubmit}>Update meal</SubmitButton>
+          <ButtonContainer>
+            <SubmitButton onSubmit={handleSubmit}>Update meal</SubmitButton>
+          </ButtonContainer>
         </Fieldset>
       </Form>
     </FormContainer>

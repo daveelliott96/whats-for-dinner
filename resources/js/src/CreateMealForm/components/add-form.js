@@ -24,7 +24,18 @@ const Form = styled.form`
   width: 100%;
 `
 
-const AddForm = ({ingredients, onFormSubmit, dispatch}) => {
+export const ButtonContainer = styled.div`
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+
+  @media only screen and (max-width: 992px) {
+    flex-direction: column;
+  }
+`
+
+const AddForm = ({ ingredients, onFormSubmit, dispatch }) => {
   const options = ingredients.map(ingredient => {
     return { value: ingredient.ingredient_id, label: ingredient.ingredient_name }
   })
@@ -52,7 +63,9 @@ const AddForm = ({ingredients, onFormSubmit, dispatch}) => {
             closeMenuOnSelect={false}
             onChange={e => dispatch({ field: 'mealIngredients', value: e })}
           />
-          <SubmitButton onSubmit={onFormSubmit}>Save meal</SubmitButton>
+          <ButtonContainer>
+            <SubmitButton onSubmit={onFormSubmit}>Save meal</SubmitButton>
+          </ButtonContainer>
         </Fieldset>
       </Form>
     </FormContainer>
