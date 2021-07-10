@@ -6,7 +6,7 @@ const StyledPageTitle = styled.h1`
   font-weight: lighter;
   font-size: 2.5rem;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 992px) {
     font-size: 2rem;
   }
 `

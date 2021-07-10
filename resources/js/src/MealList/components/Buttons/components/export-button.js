@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom"
 
 const Button = styled.button
   `
-  margin-left: auto;
   align-self: flex-end;
   width: 400px;
   height: 50px;
@@ -18,6 +17,16 @@ const Button = styled.button
   &:hover {
     cursor: pointer;
     background-color: #1f5d38;
+  }
+
+  @media only screen and (max-width: 992px) {
+    align-self: center;
+    margin-top: .5rem;
+    width: 300px;
+  }
+
+  @media only screen and (min-width: 993px) {
+    margin-left: auto;
   }
   `
 

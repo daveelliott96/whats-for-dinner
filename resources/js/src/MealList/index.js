@@ -15,11 +15,17 @@ export const ListContainer = styled.div`
   clear: both;
 `
 
+export const InfoText = styled.p`
+@media only screen and (max-width: 992px) {
+  text-align: center;
+}
+`
+
 function MealList({meals, addToShoppingList, deleteMeal}) {
   return (
     <>
       <Buttons />
-      <p>Click a meal to add it to your shopping list:</p>
+      <InfoText>Click a meal to add it to your shopping list:</InfoText>
       <ListContainer>
         {meals.length === 0 && <NoMealsMessage />}
         {
